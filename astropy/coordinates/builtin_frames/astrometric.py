@@ -2,7 +2,7 @@
 # Licensed under a 3-clause BSD style license - see LICENSE.rst
 # Note: `from __future__ import unicode_literals` is omitted here on purpose.
 # Adding it leads to str / unicode errors on Python 2
-from __future__ import (absolute_import, division, print_function)
+from __future__ import (absolute_import, division, print_function, unicode_literals)
 
 from ... import units as u
 from ..transformations import DynamicMatrixTransform, FunctionTransform
@@ -69,7 +69,7 @@ def make_astrometric_cls(framecls):
             newname = name[:-5] if name.endswith('Frame') else name
             newname += framecls.__name__
 
-            res = super(AstrometricMeta, cls).__new__(cls, newname, bases, members)
+            res = super(AstrometricMeta, cls).__new__(cls, str(newname), bases, members)
 
             # now go through all the component names and make any spherical names be "lon" and "lat"
             # instead of e.g. "ra" and "dec"
